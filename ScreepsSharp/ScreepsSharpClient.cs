@@ -21,7 +21,6 @@ public class ScreepsSharpClient
     /// <returns></returns>
     public async Task<bool> SignInAsync(string email, string password)
     {
-        var postcont = $"{{\"email\":\"{email}\",\"password\":\"{password}\"}}";
         var req = new HttpRequestMessage(HttpMethod.Post, "https://screeps.com/api/auth/signin")
         {
             Content = new StringContent($"{{\"email\":\"{email}\",\"password\":\"{password}\"}}")
