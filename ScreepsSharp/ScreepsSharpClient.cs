@@ -203,7 +203,7 @@ public class ScreepsSharpClient
     public async Task<string> GetWorldStatusAsync()
     {
         var res = await _client.GetAsync($"{_requestBase}/user/world-status").ConfigureAwait(false);
-        if (res.IsSuccessStatusCode) return await res.Content.ReadAsStringAsync().ConfigureAwait(false);
+        if (res.IsSuccessStatusCode) return JObject.Parse(await res.Content.ReadAsStringAsync().ConfigureAwait(false)).SelectToken("status").ToString();
         else return null;
     }
 }
