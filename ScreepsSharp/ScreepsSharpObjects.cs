@@ -13,22 +13,22 @@ namespace ScreepsSharp.Objects
         public string Email { get; private set; }
 
         [JsonProperty("cpu")]
-        public int CPU { get; private set; }
+        public int? CPU { get; private set; }
 
         [JsonProperty("password")]
         public string Password { get; private set; }
 
         [JsonProperty("notifyPrefs")]
-        public ScreepsNotifyPrefs NotificationPreferances { get; private set; }
+        public ScreepsNotifyPrefs? NotificationPreferances { get; private set; }
 
         [JsonProperty("credits")]
-        public float Credits { get; private set; }
+        public float? Credits { get; private set; }
 
         [JsonProperty("lastChargeTime")]
-        public DateTime LastChargeTime { get; private set; }
+        public DateTime? LastChargeTime { get; private set; }
 
         [JsonProperty("lastTweetTime")]
-        public DateTime LastTweetTime { get; private set; }
+        public DateTime? LastTweetTime { get; private set; }
 
         [JsonProperty("github")]
         public GithubData? Github { get; private set; }
@@ -144,11 +144,14 @@ namespace ScreepsSharp.Objects
 
     public struct ScreepsRoomData
     {
+        [JsonIgnore]
+        public IReadOnlyList<ScreepsRoomTerrain> Terrain { get; internal set; }
+
         [JsonProperty("ok")]
         public int Okay { get; private set; }
 
         [JsonProperty("owner")]
-        public ScreepsUserData Owner { get; private set; }
+        public ScreepsUserData? Owner { get; private set; }
 
         [JsonProperty("stats")]
         public ScreepsRoomStats Stats { get; private set; }
@@ -159,6 +162,7 @@ namespace ScreepsSharp.Objects
         [JsonProperty("totals")]
         public ScreepsTotalRoomStats StatTotals { get; private set; }
     }
+
     public struct ScreepsRoomStats
     {
         [JsonProperty("energyHarvested")]
@@ -277,5 +281,53 @@ namespace ScreepsSharp.Objects
 
         [JsonProperty("energyCreeps")]
         public int TotalEnergySpentOnCreeps { get; private set; }
+    }
+
+    public struct ScreepsRoomTerrain
+    {
+        [JsonProperty("room")]
+        public string Room { get; private set; }
+
+        [JsonProperty("x")]
+        public int X { get; private set; }
+
+        [JsonProperty("y")]
+        public int Y { get; private set; }
+
+        [JsonProperty("type")]
+        public string Type { get; private set; }
+    }
+
+    public struct ScreepsUserMessage
+    {
+        [JsonProperty("_id")]
+        public string Id { get; private set; }
+
+        [JsonProperty("message")]
+        public ScreepsMessage Message { get; private set; }
+    }
+
+    public struct ScreepsMessage
+    {
+        [JsonProperty("_id")]
+        public string Id { get; private set; }
+
+        [JsonProperty("user")]
+        public string User { get; private set; }
+
+        [JsonProperty("respondent")]
+        public string Respondent { get; private set; }
+
+        [JsonProperty("date")]
+        public DateTimeOffset Date { get; private set; }
+
+        [JsonProperty("type")]
+        public int Type { get; private set; }
+
+        [JsonProperty("text")]
+        public string Text { get; private set; }
+
+        [JsonProperty("unread")]
+        public bool IsUnread { get; private set; }
     }
 }
